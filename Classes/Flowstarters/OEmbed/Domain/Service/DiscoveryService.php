@@ -1,8 +1,8 @@
 <?php
-namespace Community\OEmbed\Domain\Service;
+namespace Flowstarters\OEmbed\Domain\Service;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Community.OEmbed".      *
+ * This script belongs to the TYPO3 Flow package "Flowstarters.OEmbed".   *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -12,7 +12,6 @@ namespace Community\OEmbed\Domain\Service;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Http\Client\CurlEngineException;
 
 /**
  * @Flow\Scope("singleton")
@@ -30,7 +29,7 @@ class DiscoveryService {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Community\OEmbed\Domain\Service\MappingService
+	 * @var \Flowstarters\OEmbed\Domain\Service\MappingService
 	 */
 	protected $mappingService;
 
@@ -44,8 +43,9 @@ class DiscoveryService {
 
 	/**
 	 * @param string|\TYPO3\Flow\Http\Uri $uri
-	 * @return \Community\OEmbed\Domain\Model\ResourceInterface
-	 * @throws \InvalidArgumentException
+	 * @return \Flowstarters\OEmbed\Domain\Model\ResourceInterface
+	 * @throws \Flowstarters\OEmbed\Exception If neither JSON nor XML service designators were found
+	 * @throws \InvalidArgumentException If $uri is not valid
 	 */
 	public function getResource($uri) {
 		if (is_string($uri)) {
@@ -64,10 +64,10 @@ class DiscoveryService {
 				$oEmbedData = $this->browser->request($serviceDesignators['text/xml'])->getContent();
 				$oEmbedObject = $this->mappingService->mapXmlToObject($oEmbedData);
 			} else {
-				throw new \Community\OEmbed\Exception('Currently only application/json and text/xml oEmbed is supported, your resource URI seems to only allow: ' . htmlspecialchars(implode(', ', array_keys($serviceDesignators))), 1359714227);
+				throw new \Flowstarters\OEmbed\Exception('Neither application/json nor text/xml oEmbed is supported by your resource URI, it seems to only supply: ' . htmlspecialchars(implode(', ', array_keys($serviceDesignators))), 1359714227);
 			}
 			return $oEmbedObject;
-		} catch (CurlEngineException $exception) {
+		} catch (\TYPO3\Flow\Http\Client\CurlEngineException $exception) {
 			return NULL;
 		}
 	}
@@ -75,7 +75,7 @@ class DiscoveryService {
 	/**
 	 * @param \TYPO3\Flow\Http\Uri $uri
 	 * @return array
-	 * @throws \Community\OEmbed\Exception
+	 * @throws \Flowstarters\OEmbed\Exception
 	 */
 	protected function discoverOEmbedServiceDesignators(\TYPO3\Flow\Http\Uri $uri) {
 		//TODO: Cache oEmbedDesignators, if possible even only the base service uri
@@ -93,7 +93,7 @@ class DiscoveryService {
 				}
 			}
 		} else {
-			throw new \Community\OEmbed\Exception('There was no oEmbed service URI discovered for the given given Resource URI: ' . htmlspecialchars($uri), 1359714226);
+			throw new \Flowstarters\OEmbed\Exception('There was no oEmbed service URI discovered for the given given Resource URI: ' . htmlspecialchars($uri), 1359714226);
 		}
 
 		return $possibleOEmbedDesignators;

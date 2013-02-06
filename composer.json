@@ -1,14 +1,13 @@
 {
-    "name": "community/oembed",
+    "name": "flowstarters/oembed",
     "type": "typo3-flow-package",
-    "description": "",
-    "version": "0.1.0",
+    "description": "Provides discovery and mapping services, a Fluid ViewHelper and a Neos plugin for handling oEmbed resources.",
     "require": {
         "typo3/flow": "*"
-	 },
+    },
     "autoload": {
         "psr-0": {
-            "Community\\OEmbed": "Classes"
+            "Flowstarters\\OEmbed": "Classes"
         }
     }
 }

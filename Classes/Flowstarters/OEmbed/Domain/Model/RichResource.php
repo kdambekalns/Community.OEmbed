@@ -1,8 +1,8 @@
 <?php
-namespace Community\OEmbed\Domain\Model;
+namespace Flowstarters\OEmbed\Domain\Model;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Community.OEmbed".      *
+ * This script belongs to the TYPO3 Flow package "Flowstarters.OEmbed".   *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -14,7 +14,7 @@ namespace Community\OEmbed\Domain\Model;
 /**
  * A video oEmbed resource
  */
-class VideoResource extends AbstractResource implements ResourceInterface {
+class RichResource extends AbstractResource implements ResourceInterface {
 
 	/**
 	 * HTML code to embed the oEmbed resource
@@ -34,16 +34,6 @@ class VideoResource extends AbstractResource implements ResourceInterface {
 	protected $height;
 
 	/**
-	 * @var integer
-	 */
-	protected $duration;
-
-	/**
-	 * @var string
-	 */
-	protected $videoId;
-
-	/**
 	 * @param string $html
 	 */
 	public function setHtml($html) {
@@ -58,56 +48,28 @@ class VideoResource extends AbstractResource implements ResourceInterface {
 	}
 
 	/**
-	 * @param int $duration
-	 */
-	public function setDuration($duration) {
-		$this->duration = $duration;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getDuration() {
-		return $this->duration;
-	}
-
-	/**
-	 * @param int $height
+	 * @param integer $height
 	 */
 	public function setHeight($height) {
 		$this->height = $height;
 	}
 
 	/**
-	 * @return int
+	 * @return integer
 	 */
 	public function getHeight() {
 		return $this->height;
 	}
 
 	/**
-	 * @param string $videoId
-	 */
-	public function setVideoId($videoId) {
-		$this->videoId = $videoId;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getVideoId() {
-		return $this->videoId;
-	}
-
-	/**
-	 * @param int $width
+	 * @param integer $width
 	 */
 	public function setWidth($width) {
 		$this->width = $width;
 	}
 
 	/**
-	 * @return int
+	 * @return integer
 	 */
 	public function getWidth() {
 		return $this->width;

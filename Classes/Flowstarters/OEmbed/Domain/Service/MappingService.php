@@ -1,8 +1,8 @@
 <?php
-namespace Community\OEmbed\Domain\Service;
+namespace Flowstarters\OEmbed\Domain\Service;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Community.OEmbed".      *
+ * This script belongs to the TYPO3 Flow package "Flowstarters.OEmbed".   *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -26,7 +26,7 @@ class MappingService {
 
 	/**
 	 * @param string $data
-	 * @return \Community\OEmbed\Domain\Model\ResourceInterface
+	 * @return \Flowstarters\OEmbed\Domain\Model\ResourceInterface
 	 */
 	public function mapJsonToObject($data) {
 		$dataArray = json_decode($data, TRUE);
@@ -35,7 +35,7 @@ class MappingService {
 
 	/**
 	 * @param string $data
-	 * @return \Community\OEmbed\Domain\Model\ResourceInterface
+	 * @return \Flowstarters\OEmbed\Domain\Model\ResourceInterface
 	 */
 	public function mapXmlToObject($data) {
 		$xml = new \SimpleXMLElement($data);
@@ -44,8 +44,8 @@ class MappingService {
 
 	/**
 	 * @param array $dataArray
-	 * @return \Community\OEmbed\Domain\Model\ResourceInterface
-	 * @throws \Community\OEmbed\Exception
+	 * @return \Flowstarters\OEmbed\Domain\Model\ResourceInterface
+	 * @throws \Flowstarters\OEmbed\Exception
 	 */
 	protected function mapArrayToObject(array $dataArray) {
 		if (isset($dataArray['type']) && $this->objectTypeExists($dataArray['type'])) {
@@ -53,7 +53,7 @@ class MappingService {
 			$oEmbedResource = new $className;
 			return $this->mapDataToObject($dataArray, $oEmbedResource);
 		} else {
-			throw new \Community\OEmbed\Exception('Retrieved data contained no type, could not map to oEmbed object', 1359741982);
+			throw new \Flowstarters\OEmbed\Exception('Retrieved data contained no type, could not map to oEmbed object', 1359741982);
 		}
 	}
 
@@ -62,13 +62,13 @@ class MappingService {
 	 * @return string
 	 */
 	protected function deriveClassName($type) {
-		return 'Community\\OEmbed\\Domain\Model\\' . ucfirst($type) . 'Resource';
+		return 'Flowstarters\\OEmbed\\Domain\Model\\' . ucfirst($type) . 'Resource';
 	}
 
 	/**
 	 * @param array $dataArray
-	 * @param \Community\OEmbed\Domain\Model\ResourceInterface $oEmbedResource
-	 * @return \Community\OEmbed\Domain\Model\ResourceInterface
+	 * @param \Flowstarters\OEmbed\Domain\Model\ResourceInterface $oEmbedResource
+	 * @return \Flowstarters\OEmbed\Domain\Model\ResourceInterface
 	 */
 	protected function mapDataToObject($dataArray, $oEmbedResource) {
 		$additionalProperties = array();

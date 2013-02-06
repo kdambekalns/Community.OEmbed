@@ -1,8 +1,8 @@
 <?php
-namespace Community\OEmbed\Command;
+namespace Flowstarters\OEmbed\Command;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Community.OEmbed".      *
+ * This script belongs to the TYPO3 Flow package "Flowstarters.OEmbed".   *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
@@ -22,7 +22,7 @@ class OEmbedCommandController extends \TYPO3\Flow\Cli\CommandController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Community\OEmbed\Domain\Service\DiscoveryService
+	 * @var \Flowstarters\OEmbed\Domain\Service\DiscoveryService
 	 */
 	protected $discoveryService;
 
